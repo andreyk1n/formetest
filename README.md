@@ -35,3 +35,21 @@ if (strpos($current_url, '/en/') !== false): ?>
         <?php endif; ?>
     <?php endwhile; ?>
 <?php endif; ?>
+
+
+------
+functions.php
+
+function register_my_menu() {
+    register_nav_menu('header_menu', __('Головне меню'));
+}
+add_action('after_setup_theme', 'register_my_menu');
+
+header.php
+<?php
+        wp_nav_menu(array(
+            'theme_location' => 'header_menu',
+            'menu_class' => 'header-menu',
+            'container' => 'nav',
+        ));
+        ?>
