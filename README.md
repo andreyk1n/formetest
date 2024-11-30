@@ -22,3 +22,16 @@ if (strpos($current_url, '/en/') !== false): ?>
 <?php else: ?>
     <button>Машина</button>
 <?php endif; ?>
+
+----------------
+
+<?php if (have_rows('letter_page')): ?> <?php /* flexible field group */ ?>
+    <?php while (have_rows('letter_page')): the_row(); ?>
+        <?php if (get_row_layout() == 'text_field_text'): ?>
+            <?php get_template_part('template-parts/text_field'); ?>
+
+        <?php elseif (get_row_layout() == 'text_editor_editor'): ?>
+            <?php get_template_part('template-parts/text_editor'); ?>
+        <?php endif; ?>
+    <?php endwhile; ?>
+<?php endif; ?>
