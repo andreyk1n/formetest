@@ -53,3 +53,32 @@ header.php
             'container' => 'nav',
         ));
         ?>
+
+
+        -------------------------
+
+        try
+
+
+        <?php
+// Отримуємо URL зображення ACF
+$image_acf = get_field('your_acf_image_field');
+
+// Отримуємо URL стандартного thumbnail WordPress
+$image_thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+
+// Визначаємо ширину екрана за допомогою JavaScript і передаємо її через GET/POST або AJAX
+$screen_width = isset($_SERVER['HTTP_UA_RESOLUTION']) ? (int)$_SERVER['HTTP_UA_RESOLUTION'] : 1200;
+
+// Вибираємо зображення в залежності від ширини
+$image_url = $screen_width < 850 ? $image_acf['url'] : $image_thumbnail;
+
+// Виводимо зображення
+if ($image_url):
+?>
+  <img 
+    src="<?php echo esc_url($image_url); ?>" 
+    alt="<?php echo esc_attr($image_acf['alt'] ?? 'Hero Image'); ?>" 
+    class="hero-image"
+  />
+<?php endif; ?>
